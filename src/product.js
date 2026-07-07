@@ -9,7 +9,16 @@ const Products = [
     isNew: true,
     quantity: 1
   },
- 
+   {
+    id: 2,
+    name: "grey Hoodie",
+    img: "hoodie2.jpg",
+    category: "hoodies",
+    description: "Soft fleece hoodie for men",
+    price: 1499,
+    isNew: true,
+    quantity: 1
+  },
   {
     id: 3,
     name: "baggy style Hoodie",
