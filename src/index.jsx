@@ -1,7 +1,12 @@
 import "./styles.css"
 import Products from "./product"
+import { useState } from "react"
+import ProductCard from "./components/ProductCard"
+
 
 function Mainpage(){
+
+  const [cart, setCart] = useState([]);
   const menProducts = Products.filter(
   (product) => product.category === "men"
 );
@@ -24,6 +29,9 @@ function Mainpage(){
   (product) => product.category === "newarrival"
 );
 
+function addToCart(product) {
+  setCart([...cart, product]);
+}
   return(
 
      <>
@@ -56,7 +64,7 @@ function Mainpage(){
       </a>
       <a href="cart.html" aria-label="Go to cart">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
-        <span className="cart-badge">3</span>
+        <span className="cart-badge">{cart.length}</span>
       </a>
     </div>
   </div>
@@ -170,44 +178,11 @@ function Mainpage(){
 
     <div className="product-grid">
   {newarrivalProducts.map((product) => (
-    <article className="product-card" key={product.id}>
-      <div className="product-thumb">
-
-        {product.isNew && <span className="tag">New</span>}
-
-        <button className="wish-btn" aria-label="Add to wishlist">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/>
-          </svg>
-        </button>
-
-        <img
-          src={product.img}
-          alt={product.name}
-          className="cat-image"
-        />
-      </div>
-
-      <div className="product-info">
-        <h3>{product.name}</h3>
-
-        <p className="meta">{product.description}</p>
-
-        <div className="price-row">
-          <span className="price">${product.price}</span>
-        </div>
-
-        <a href="cart.html" className="add-cart-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="9" cy="21" r="1"/>
-            <circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
-          </svg>
-
-          Add to Cart
-        </a>
-      </div>
-    </article>
+    <ProductCard 
+    key={product.id}
+    product={product}
+    addToCart={addToCart}
+     />
   ))}
 </div>
   </div>
@@ -223,44 +198,11 @@ function Mainpage(){
 
    <div className="product-grid">
   {menProducts.map((product) => (
-    <article className="product-card" key={product.id}>
-      <div className="product-thumb">
-
-        {product.isNew && <span className="tag">New</span>}
-
-        <button className="wish-btn" aria-label="Add to wishlist">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/>
-          </svg>
-        </button>
-
-        <img
-          src={product.img}
-          alt={product.name}
-          className="cat-image"
-        />
-      </div>
-
-      <div className="product-info">
-        <h3>{product.name}</h3>
-
-        <p className="meta">{product.description}</p>
-
-        <div className="price-row">
-          <span className="price">${product.price}</span>
-        </div>
-
-        <a href="cart.html" className="add-cart-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="9" cy="21" r="1"/>
-            <circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
-          </svg>
-
-          Add to Cart
-        </a>
-      </div>
-    </article>
+    <ProductCard 
+    key={product.id}
+    product={product} 
+    addToCart={addToCart}
+    />
   ))}
 </div>
   </div>
@@ -273,44 +215,11 @@ function Mainpage(){
 
     <div className="product-grid">
   {womenProducts.map((product) => (
-    <article className="product-card" key={product.id}>
-      <div className="product-thumb">
-
-        {product.isNew && <span className="tag">New</span>}
-
-        <button className="wish-btn" aria-label="Add to wishlist">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/>
-          </svg>
-        </button>
-
-        <img
-          src={product.img}
-          alt={product.name}
-          className="cat-image"
-        />
-      </div>
-
-      <div className="product-info">
-        <h3>{product.name}</h3>
-
-        <p className="meta">{product.description}</p>
-
-        <div className="price-row">
-          <span className="price">${product.price}</span>
-        </div>
-
-        <a href="cart.html" className="add-cart-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="9" cy="21" r="1"/>
-            <circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
-          </svg>
-
-          Add to Cart
-        </a>
-      </div>
-    </article>
+   <ProductCard 
+    key={product.id}
+    product={product} 
+    addToCart={addToCart}
+    />
   ))}
 </div>
   </div>
@@ -323,44 +232,10 @@ function Mainpage(){
 
   <div className="product-grid">
   {hoodiesProducts.map((product) => (
-    <article className="product-card" key={product.id}>
-      <div className="product-thumb">
-
-        {product.isNew && <span className="tag">New</span>}
-
-        <button className="wish-btn" aria-label="Add to wishlist">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/>
-          </svg>
-        </button>
-
-        <img
-          src={product.img}
-          alt={product.name}
-          className="cat-image"
-        />
-      </div>
-
-      <div className="product-info">
-        <h3>{product.name}</h3>
-
-        <p className="meta">{product.description}</p>
-
-        <div className="price-row">
-          <span className="price">${product.price}</span>
-        </div>
-
-        <a href="cart.html" className="add-cart-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="9" cy="21" r="1"/>
-            <circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
-          </svg>
-
-          Add to Cart
-        </a>
-      </div>
-    </article>
+    <ProductCard 
+    key={product.id}
+    product={product}
+    addToCart={addToCart} />
   ))}
 </div>
   </div>
@@ -373,44 +248,10 @@ function Mainpage(){
 
    <div className="product-grid">
   {tshirtsProducts.map((product) => (
-    <article className="product-card" key={product.id}>
-      <div className="product-thumb">
-
-        {product.isNew && <span className="tag">New</span>}
-
-        <button className="wish-btn" aria-label="Add to wishlist">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/>
-          </svg>
-        </button>
-
-        <img
-          src={product.img}
-          alt={product.name}
-          className="cat-image"
-        />
-      </div>
-
-      <div className="product-info">
-        <h3>{product.name}</h3>
-
-        <p className="meta">{product.description}</p>
-
-        <div className="price-row">
-          <span className="price">${product.price}</span>
-        </div>
-
-        <a href="cart.html" className="add-cart-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="9" cy="21" r="1"/>
-            <circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
-          </svg>
-
-          Add to Cart
-        </a>
-      </div>
-    </article>
+   <ProductCard 
+    key={product.id}
+    product={product} 
+    addToCart={addToCart}/>
   ))}
 </div>
   </div>
@@ -422,44 +263,10 @@ function Mainpage(){
 
    <div className="product-grid">
   {jeansProducts.map((product) => (
-    <article className="product-card" key={product.id}>
-      <div className="product-thumb">
-
-        {product.isNew && <span className="tag">New</span>}
-
-        <button className="wish-btn" aria-label="Add to wishlist">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/>
-          </svg>
-        </button>
-
-        <img
-          src={product.img}
-          alt={product.name}
-          className="cat-image"
-        />
-      </div>
-
-      <div className="product-info">
-        <h3>{product.name}</h3>
-
-        <p className="meta">{product.description}</p>
-
-        <div className="price-row">
-          <span className="price">${product.price}</span>
-        </div>
-
-        <a href="cart.html" className="add-cart-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="9" cy="21" r="1"/>
-            <circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
-          </svg>
-
-          Add to Cart
-        </a>
-      </div>
-    </article>
+    <ProductCard 
+    key={product.id}
+    product={product} 
+    addToCart={addToCart}/>
   ))}
 </div>
   </div>
@@ -471,44 +278,10 @@ function Mainpage(){
 
   <div className="product-grid">
   {clothesProducts.map((product) => (
-    <article className="product-card" key={product.id}>
-      <div className="product-thumb">
-
-        {product.isNew && <span className="tag">New</span>}
-
-        <button className="wish-btn" aria-label="Add to wishlist">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/>
-          </svg>
-        </button>
-
-        <img
-          src={product.img}
-          alt={product.name}
-          className="cat-image"
-        />
-      </div>
-
-      <div className="product-info">
-        <h3>{product.name}</h3>
-
-        <p className="meta">{product.description}</p>
-
-        <div className="price-row">
-          <span className="price">${product.price}</span>
-        </div>
-
-        <a href="cart.html" className="add-cart-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="9" cy="21" r="1"/>
-            <circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
-          </svg>
-
-          Add to Cart
-        </a>
-      </div>
-    </article>
+     <ProductCard 
+    key={product.id}
+    product={product} 
+    addToCart={addToCart}/>
   ))}
 </div>
   </div>

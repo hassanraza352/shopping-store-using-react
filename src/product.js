@@ -63,6 +63,16 @@ const Products = [
     price: 2500,
     isNew: true
   },
+   {
+    id: 8,
+    img:"newarrival1.jpg",
+    name: "newarrival",
+    category: "newarrival",
+    description:"new arrival",
+    price: 2500,
+    isNew: true
+
+  },
 ];
 
 export default Products;
