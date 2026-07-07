@@ -1,12 +1,14 @@
 import "./styles.css"
 import Products from "./product"
-import { useState } from "react"
+// import { useState } from "react"
 import ProductCard from "./components/ProductCard"
+import { Link } from "react-router-dom"
 
 
-function Mainpage(){
 
-  const [cart, setCart] = useState([]);
+function Mainpage({cart, setCart}){
+
+  // const [cart, setCart] = useState([]);
   const menProducts = Products.filter(
   (product) => product.category === "men"
 );
@@ -30,7 +32,43 @@ function Mainpage(){
 );
 
 function addToCart(product) {
-  setCart([...cart, product]);
+
+  const existingItem = cart.find(
+    (item) => item.id === product.id
+  );
+
+  if (existingItem) {
+
+    const updatedCart = cart.map((item) => {
+
+      if (item.id === product.id) {
+
+        return {
+          ...item,
+          quantity: item.quantity + 1,
+        };
+
+      } else {
+
+        return item;
+
+      }
+
+    });
+
+    setCart(updatedCart);
+
+  } else {
+
+    setCart([
+      ...cart,
+      {
+        ...product,
+        quantity: 1,
+      },
+    ]);
+
+  }
 }
   return(
 
@@ -44,10 +82,9 @@ function addToCart(product) {
 
 <header className="site-header">
   <div className="container">
-    <a href="index.html" className="logo">URBAN <span>WEAR</span></a>
-
+    <Link to="/" className="logo">URBAN <span>WEAR</span></Link>
     <nav className="main-nav">
-      <a href="index.html" className="active">Home</a>
+      <Link to="/" className="active">Home</Link>
       <a href="#shop">Shop</a>
       <a href="#categories">Categories</a>
       <a href="#brands">Brands</a>
@@ -62,10 +99,10 @@ function addToCart(product) {
       <a href="#" aria-label="Account">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
       </a>
-      <a href="cart.html" aria-label="Go to cart">
+      <Link to="/cart" aria-label="Go to cart">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
         <span className="cart-badge">{cart.length}</span>
-      </a>
+      </Link>
     </div>
   </div>
 </header>
@@ -128,7 +165,7 @@ function addToCart(product) {
         <div className="cat-thumb"><img src="hoodie.jpg" alt="hoodies" className="cat-image"/></div>
         <span>Hoodies</span>
       </a>
-      <a href="shirts" className="cat-card">
+      <a href="#shirts" className="cat-card">
         <div className="cat-thumb"><img src="tshirt.jpg" alt="T-shirt" className="cat-image"/></div>
         <span>T-Shirts</span>
       </a>
