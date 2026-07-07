@@ -1,8 +1,9 @@
-
+import Mainpage from "./index.jsx"
 
 function App() {
   return(
-    <div>hy</div>
+
+    <Mainpage/>
   )
 }
 
